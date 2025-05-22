@@ -115,7 +115,7 @@ python backend/scripts/schema.py
 
 ---
 
-## 🚀 Running the Application
+## Running the Application
 
 ### Backend
 
@@ -133,7 +133,7 @@ streamlit run app.py
 
 ---
 
-## 🔍 How It Works
+##  How It Works
 
 1. **Upload PDFs**  
    Users upload engineering PDFs via the frontend interface.
