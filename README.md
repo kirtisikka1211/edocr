@@ -61,15 +61,61 @@ edocr/
 
 ---
 ##  API Endpoints
+1. `POST /extract_info/`
 
-- `POST /extract_info/`  
-  Extract text, tables, and metadata from uploaded PDFs.
+  - Extract text, tables, and metadata from uploaded PDFs.
 
-- `POST /save_db`  
-  Save extracted information to the database.
 
-- `POST /preprocess_and_extract_dimensions`  
-  Run preprocessing on images and extract GD&T dimensions.
+      ```bash
+        curl -X 'POST' \
+        'http://0.0.0.0:8000/extract_information/' \
+        -H 'accept: application/json' \
+        -H 'Content-Type: multipart/form-data' \
+        -F 'file=@rje0166202.pdf;type=application/pdf'
+       ```
+- Response
+
+   ```json
+            {
+              "filename": "rje0166202.pdf",
+              "extracted_entities": {
+                "0": "{...}"
+              }
+            }
+     ```
+2.  `POST /save_db`  
+- Save extracted information to the database.
+  
+   ```bash
+        curl -X 'POST' \
+        'http://0.0.0.0:8000/save_db' \
+        -H 'accept: application/json' \
+        -H 'Content-Type: application/json' \
+        -d '{
+             "filename": "rje0166202.pdf",
+              "extracted_entities": {...
+             }
+          }'
+    ```
+ - Response
+
+      ```json
+          {
+            "status": "success",
+            "message": "Data saved successfully to the database."
+          }
+      ```
+
+3. `POST /preprocess_and_extract_dimensions`  
+- Run preprocessing on images and extract GD&T dimensions.
+  
+    ```bash
+        curl -X 'POST' \
+          'http://0.0.0.0:8000/preprocess_and_extract_dimensions' \
+          -H 'accept: application/json' \
+          -H 'Content-Type: multipart/form-data' \
+          -F 'file=@drawing_sample.pdf;type=application/pdf'
+    ```
 
 ## 🔧 Installation
 
